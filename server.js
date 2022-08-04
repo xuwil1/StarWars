@@ -1,3 +1,7 @@
+if(process.env.NODE_ENV != 'production'){
+  require('dotenv').config();
+}
+
 const express = require('express');
 const bodyParser= require('body-parser')
 const app = express();
@@ -10,7 +14,7 @@ app.set('view engine','ejs')
 app.use(express.static('public'))
 app.use(bodyParser.json())
 
-      MongoClient.connect('mongodb+srv://yoda:57ZzPfXqlI0D7FCK@cluster0.gd43acz.mongodb.net/?retryWrites=true&w=majority', 
+      MongoClient.connect(process.env.DATABASE_URL, 
       {useUnifiedTopology: true},(err, client) => {
         if (err) return console.error(err)
         console.log('Connected to Database')
